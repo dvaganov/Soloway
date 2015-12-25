@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=SoloWay
+Name[en_US]=SoloWay
+Comment=Listen internet streams
+Comment[en_US.utf8]=
+GenericName[en_US.utf8]=Listen internet streams
+Exec=/home/dvaganov/Documents/Programming/Vala/SoloWay/soloway2
+Icon=eagle
+Type=Application
+Terminal=false
+StartupNotify=true
+Categories=Player;Audio;Network;
+
