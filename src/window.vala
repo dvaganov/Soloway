@@ -70,9 +70,9 @@ namespace SoloWay {
 				widget.destroy();
 			});
 		}
-		public void change_btn_state_to_play (bool is_playing) {
-			_panel.change_state_to_play (is_playing);
-			if (is_playing) {
+		public void change_btn_state_to_play (Player player) {
+			_panel.change_state_to_play (player.is_playing);
+			if (player.is_playing) {
 				_panel.reveal_child = true;
 			} else {
 				_panel.reveal_child = false;
@@ -94,8 +94,8 @@ namespace SoloWay {
 				prev_row.activate ();
 			}
 		}
-		public inline void change_panel_info (string info) {
-			_panel.change_info (info);
+		public inline void change_panel_info (Player player) {
+			_panel.change_info (player.current_playing);
 		}
 	}
 }
