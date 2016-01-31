@@ -1,4 +1,5 @@
 SRC = \
+src/settings.vala \
 src/filedialog.vala \
 src/playlist.vala \
 src/widgets.vala \
