@@ -7,9 +7,9 @@ namespace SoloWay {
 		}
 		protected override void activate() {
 			Settings.init();
-			_createActions();
+			create_actions();
 			var menu = new GLib.Menu();
-			menu.append("Change State", "app.change-state");
+			//menu.append("Change State", "app.change-state");
 			menu.append("Quit", "app.quit");
 			app_menu = menu;
 			_win = new Window(800, 600);
@@ -17,10 +17,10 @@ namespace SoloWay {
 			Player.getInstance().onStateChange.connect(_win.change_btn_state_to_play);
 			Player.getInstance().onInfoChange.connect(_win.change_panel_info);
 			add_window(_win);
-			_createPlaylist();
+			create_playlist();
 			_win.show_all();
 		}
-		private void _createActions() {
+		private void create_actions() {
 			var action = new SimpleAction("change-state", null);
 			action.activate.connect(() =>
 			{
@@ -43,7 +43,7 @@ namespace SoloWay {
 			action.activate.connect(this.quit);
 			add_action(action);
 		}
-		private void _createPlaylist() {
+		private void create_playlist() {
 			_win.clean_playlist();
 			var playlist = Playlist.getInstance();
 			if (playlist.open(Settings.get_param("playlist_path"))) {
