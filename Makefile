@@ -1,8 +1,10 @@
 SRC = \
-src/window.vala \
-src/application.vala \
+src/filedialog.vala \
+src/playlist.vala \
+src/widgets.vala \
 src/player.vala \
-src/widgets.vala
+src/window.vala \
+src/application.vala
 
 PKG = \
 --pkg gtk+-3.0 \

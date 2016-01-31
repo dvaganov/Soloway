@@ -18,6 +18,18 @@ namespace SoloWay {
 			_header_bar.show_close_button = true;
 			set_titlebar (_header_bar);
 
+			var btn = new Gtk.Button.with_label("Save");
+			btn.clicked.connect(() => {
+				SaveFileDialog.run(this);
+			});
+			_header_bar.pack_start(btn);
+
+			btn = new Gtk.Button.with_label("Open");
+			btn.clicked.connect(() => {
+				OpenFileDialog.run(this);
+			});
+			_header_bar.pack_start(btn);
+
 			var main_grid = new Gtk.Grid ();
 			add (main_grid);
 

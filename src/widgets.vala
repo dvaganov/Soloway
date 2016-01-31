@@ -126,6 +126,9 @@ namespace SoloWay {
 			_btn_add.get_style_context().add_class("suggested-action");
 			_btn_add.sensitive = false;
 			_btn_add.no_show_all = true;
+			_btn_add.clicked.connect(() => {
+				Playlist.getInstance().addEntry(_ent_title.text, _ent_uri.text);
+			});
 			grid.attach (_btn_add, 0, 4);
 
 			_btn_edit = new Gtk.Button.with_mnemonic("_Edit");
