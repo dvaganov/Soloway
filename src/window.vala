@@ -51,6 +51,11 @@ namespace SoloWay {
 			    on_row_activate (entry.uri);
 			    panel.change_title (entry.title);
 			});
+			stdout.printf("Bind model\n");
+			playlist.bind_model(Playlist.get_model(), (item) => {
+				return item as Entry;
+			});
+			stdout.printf("Create bind\n");
 			scrolled_win.add (playlist);
 		}
 		public void add_entry (string title, string uri) {

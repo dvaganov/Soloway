@@ -2,12 +2,16 @@ namespace SoloWay {
 	public class Application : Gtk.Application {
 		private MainWindow _win;
 
-		public Application (string[] args) {
+		public Application(string[] args) {
 			Object(application_id: "home.dvaganov.soloway");
 			Player.init(args);
 		}
 		protected override void activate() {
 			Settings.init();
+			// create_playlist
+			var playlist = Playlist.get_instance();
+			//playlist.changed.connect(create_playlist);
+			playlist.open(Settings.get_param("playlist_path"));
 			create_actions();
 			var menu = new GLib.Menu();
 			//menu.append("Change State", "app.change-state");
@@ -19,10 +23,6 @@ namespace SoloWay {
 			Player.get_instance().state_changed.connect(_win.change_btn_state_to_play);
 			Player.get_instance().info_changed.connect(_win.change_panel_info);
 			add_window(_win);
-			// create_playlist
-			var playlist = Playlist.get_instance();
-			playlist.changed.connect(create_playlist);
-			playlist.open(Settings.get_param("playlist_path"));
 
 			_win.show_all();
 		}
@@ -49,7 +49,7 @@ namespace SoloWay {
 			action.activate.connect(this.quit);
 			add_action(action);
 		}
-		public void create_playlist(Playlist playlist) {
+/*		public void create_playlist(Playlist playlist) {
 			_win.clean_playlist();
 			string title, uri;
 			for (var i = 0; i < playlist.length; i++) {
@@ -58,6 +58,7 @@ namespace SoloWay {
 			}
 			_win.show_all();
 		}
+*/
 		public static int main (string[] args) {
 			var app = new Application(args);
 			return app.run(args);

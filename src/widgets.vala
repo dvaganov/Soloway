@@ -3,7 +3,7 @@ namespace SoloWay {
 		public string title {get; private set;}
 		public string uri {get; private set;}
 
-		public Entry (string title, string uri) {
+		public Entry (string? title, string? uri) {
 			this.title = title;
 			this.uri = uri;
 			this.height_request = 50;
