@@ -11,15 +11,15 @@ namespace SoloWay {
     private Parameter[] param_list;
 
     private Settings() {
-      file = new GLib.KeyFile();
-      file.set_list_separator('=');
+      this.file = new GLib.KeyFile();
+      this.file.set_list_separator('=');
       try {
-        file.load_from_file(file_name, GLib.KeyFileFlags.NONE);
-        var keys = file.get_keys(group_name);
-        param_list = new Parameter[keys.length];
+        this.file.load_from_file(this.file_name, GLib.KeyFileFlags.NONE);
+        var keys = file.get_keys(this.group_name);
+        this.param_list = new Parameter[keys.length];
         for (var i = 0; i < keys.length; i++) {
-          param_list[i].key = keys[i];
-          param_list[i].val = file.get_value(group_name, keys[i]);
+          this.param_list[i].key = keys[i];
+          this.param_list[i].val = this.file.get_value(this.group_name, keys[i]);
         }
       } catch (GLib.KeyFileError e) {
         print(@"Settings(): $(e.message)\n");

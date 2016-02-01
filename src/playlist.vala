@@ -16,18 +16,18 @@ namespace SoloWay {
     }
 
     private Playlist() {
-      file = new GLib.KeyFile();
-      file.set_list_separator('=');
-      playlist = new GLib.GenericArray<SongEnry?>();
+      this.file = new GLib.KeyFile();
+      this.file.set_list_separator('=');
+      this.playlist = new GLib.GenericArray<SongEnry?>();
     }
     public void open(string filepath) {
       try {
-        file.load_from_file(filepath, GLib.KeyFileFlags.NONE);
+        this.file.load_from_file(filepath, GLib.KeyFileFlags.NONE);
         var titles = file.get_keys(group_name);
         for (var i = 0; i < titles.length; i++) {
-          playlist.add({titles[i], file.get_string(group_name, titles[i])});
+          this.playlist.add({titles[i], this.file.get_string(this.group_name, titles[i])});
         }
-        changed(this);
+        this.changed(this);
       } catch(GLib.KeyFileError key_err) {
         print(@"Load file: $(key_err.message)\n");
       } catch(GLib.FileError err) {
@@ -37,27 +37,27 @@ namespace SoloWay {
     public void save(string filepath) {
       SongEnry entry;
       for (var i = 0; i < playlist.length; i++) {
-        entry = playlist.get(i);
-        file.set_string(group_name, entry.title, entry.uri);
+        entry = this.playlist.get(i);
+        this.file.set_string(this.group_name, entry.title, entry.uri);
       }
       try {
-        file.save_to_file(filepath);
+        this.file.save_to_file(filepath);
       } catch (GLib.FileError e) {
         print(@"Playlist.save(): $(e.message)");
       }
     }
     public void add_entry(string title, string uri) {
-      playlist.add({title, uri});
-      changed(this);
+      this.playlist.add({title, uri});
+      this.changed(this);
     }
     public void get_entry(int index, out string title, out string uri) {
-      var entry = playlist.get(index);
+      var entry = this.playlist.get(index);
       title = entry.title;
       uri = entry.uri;
     }
     public void remove_entry(int index) {
-      playlist.remove_index(index);
-      changed(this);
+      this.playlist.remove_index(index);
+      this.changed(this);
     }
     public static Playlist get_instance() {
       if (self == null) {

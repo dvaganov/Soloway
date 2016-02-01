@@ -3,13 +3,13 @@ namespace SoloWay {
     private static SidePanel self;
 
     private SidePanel() {
-      transition_type = Gtk.RevealerTransitionType.SLIDE_LEFT;
-      valign = Gtk.Align.CENTER;
+      this.transition_type = Gtk.RevealerTransitionType.SLIDE_LEFT;
+      this.valign = Gtk.Align.CENTER;
 
       var grid = new Gtk.Grid();
       grid.margin = 5;
       grid.row_spacing = 10;
-      add(grid);
+      this.add(grid);
 
       var label = new Gtk.Label("Title:");
       grid.attach(label, 0, 0);
@@ -17,14 +17,14 @@ namespace SoloWay {
       label = new Gtk.Label("URL:");
       grid.attach(label, 0, 2);
 
-      var entry = new Gtk.Entry();
-      grid.attach(entry, 0, 1);
-
       var btn = new Gtk.Button.with_mnemonic("_Add");
       btn.get_style_context().add_class("suggested-action");
       btn.sensitive = false;
       btn.clicked.connect(add_entry);
       grid.attach (btn, 0, 4);
+
+      var entry = new Gtk.Entry();
+      grid.attach(entry, 0, 1);
 
       entry = new Gtk.Entry ();
       entry.changed.connect ((editable) => {
@@ -47,15 +47,15 @@ namespace SoloWay {
       this.show_panel();
     }
     public void show_panel() {
-      if (reveal_child == false) {
+      if (this.reveal_child == false) {
         var grid = this.get_child() as Gtk.Grid;
         var entry = grid.get_child_at(0, 1) as Gtk.Entry;
         entry.text = "";
         entry = grid.get_child_at(0, 3) as Gtk.Entry;
         entry.text = "";
         reveal_child = true;
-      } else if (reveal_child == true) {
-        reveal_child = false;
+      } else {
+        this.reveal_child = false;
       }
     }
     public Gtk.Button get_controller() {

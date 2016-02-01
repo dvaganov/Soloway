@@ -62,9 +62,9 @@ namespace SoloWay {
 				widget.destroy();
 			});
 		}
-		public void change_btn_state_to_play(Player player) {
-			panel.change_state_to_play (player.is_playing);
-			if (player.is_playing) {
+		public void change_btn_state_to_play(bool is_playing) {
+			panel.change_state_to_play (is_playing);
+			if (is_playing) {
 				panel.reveal_child = true;
 			} else {
 				panel.reveal_child = false;
@@ -86,8 +86,8 @@ namespace SoloWay {
 				prev_row.activate ();
 			}
 		}
-		public inline void change_panel_info(Player player) {
-			panel.change_info (player.current_playing);
+		public inline void change_panel_info(string info) {
+			panel.change_info(info);
 		}
 		public static void init(Gtk.Application app) {
 			if (self == null) {

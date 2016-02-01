@@ -4,6 +4,7 @@ namespace SoloWay {
 
 		public Application (string[] args) {
 			Object(application_id: "home.dvaganov.soloway");
+			Player.init(args);
 		}
 		protected override void activate() {
 			Settings.init();
@@ -14,9 +15,9 @@ namespace SoloWay {
 			app_menu = menu;
 			MainWindow.init(this);
 			_win = MainWindow.get_instance();
-			_win.on_row_activate.connect(Player.getInstance().changeState);
-			Player.getInstance().onStateChange.connect(_win.change_btn_state_to_play);
-			Player.getInstance().onInfoChange.connect(_win.change_panel_info);
+			_win.on_row_activate.connect(Player.get_instance().change_state);
+			Player.get_instance().state_changed.connect(_win.change_btn_state_to_play);
+			Player.get_instance().info_changed.connect(_win.change_panel_info);
 			add_window(_win);
 			// create_playlist
 			var playlist = Playlist.get_instance();
@@ -29,7 +30,7 @@ namespace SoloWay {
 			var action = new SimpleAction("change-state", null);
 			action.activate.connect(() =>
 			{
-				Player.getInstance().changeState();
+				Player.get_instance().change_state();
 			});
 			add_action(action);
 			action = new SimpleAction("next-entry", null);
@@ -58,7 +59,6 @@ namespace SoloWay {
 			_win.show_all();
 		}
 		public static int main (string[] args) {
-			Gst.init (ref args);
 			var app = new Application(args);
 			return app.run(args);
 		}
