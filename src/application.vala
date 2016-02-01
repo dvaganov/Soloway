@@ -1,6 +1,6 @@
 namespace SoloWay {
 	public class Application : Gtk.Application {
-		private Window _win;
+		private MainWindow _win;
 
 		public Application (string[] args) {
 			Object(application_id: "home.dvaganov.soloway");
@@ -12,12 +12,17 @@ namespace SoloWay {
 			//menu.append("Change State", "app.change-state");
 			menu.append("Quit", "app.quit");
 			app_menu = menu;
-			_win = new Window(800, 600);
+			MainWindow.init(this);
+			_win = MainWindow.get_instance();
 			_win.on_row_activate.connect(Player.getInstance().changeState);
 			Player.getInstance().onStateChange.connect(_win.change_btn_state_to_play);
 			Player.getInstance().onInfoChange.connect(_win.change_panel_info);
 			add_window(_win);
-			create_playlist();
+			// create_playlist
+			var playlist = Playlist.get_instance();
+			playlist.changed.connect(create_playlist);
+			playlist.open(Settings.get_param("playlist_path"));
+
 			_win.show_all();
 		}
 		private void create_actions() {
@@ -43,16 +48,14 @@ namespace SoloWay {
 			action.activate.connect(this.quit);
 			add_action(action);
 		}
-		private void create_playlist() {
+		public void create_playlist(Playlist playlist) {
 			_win.clean_playlist();
-			var playlist = Playlist.get();
-			if (playlist.open(Settings.get_param("playlist_path"))) {
-				string title, uri;
-				for (var i = 0; i < playlist.length; i++) {
-					playlist.get_entry(i, out title, out uri);
-					_win.add_entry(title, uri);
-				}
+			string title, uri;
+			for (var i = 0; i < playlist.length; i++) {
+				playlist.get_entry(i, out title, out uri);
+				_win.add_entry(title, uri);
 			}
+			_win.show_all();
 		}
 		public static int main (string[] args) {
 			Gst.init (ref args);

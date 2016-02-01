@@ -14,7 +14,7 @@ namespace SoloWay {
       _dialog.add_filter(create_filter());
       if (_dialog.run() == Gtk.ResponseType.ACCEPT) {
         var filepath = _dialog.get_filename();
-        Playlist.get().open(filepath);
+        Playlist.get_instance().open(filepath);
       }
       _dialog.destroy();
     }
@@ -28,7 +28,7 @@ namespace SoloWay {
         if (!filepath.has_suffix (@".$PLAYLIST_FORMAT")) {
           filepath += @".$PLAYLIST_FORMAT";
         }
-        Playlist.get().save(filepath);
+        Playlist.get_instance().save(filepath);
       }
       _dialog.close ();
     }
