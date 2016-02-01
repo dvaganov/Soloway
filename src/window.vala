@@ -20,13 +20,13 @@ namespace SoloWay {
 
 			var btn = new Gtk.Button.with_label("Save");
 			btn.clicked.connect(() => {
-				SaveFileDialog.run(this);
+				Dialogs.save_file(this);
 			});
 			_header_bar.pack_start(btn);
 
 			btn = new Gtk.Button.with_label("Open");
 			btn.clicked.connect(() => {
-				OpenFileDialog.run(this);
+				Dialogs.open_file(this);
 			});
 			_header_bar.pack_start(btn);
 
