@@ -127,7 +127,7 @@ namespace SoloWay {
 			_btn_add.sensitive = false;
 			_btn_add.no_show_all = true;
 			_btn_add.clicked.connect(() => {
-				Playlist.getInstance().addEntry(_ent_title.text, _ent_uri.text);
+				Playlist.get().add_entry(_ent_title.text, _ent_uri.text);
 			});
 			grid.attach (_btn_add, 0, 4);
 

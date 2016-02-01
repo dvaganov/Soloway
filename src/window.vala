@@ -75,7 +75,7 @@ namespace SoloWay {
 		}
 		public void add_entry (string title, string uri) {
 			var entry = new Entry (title, uri);
-			_playlist.add (entry);
+			_playlist.add(entry);
 		}
 		public void clean_playlist () {
 			_playlist.foreach((widget) => {

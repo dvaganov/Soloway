@@ -1,33 +1,33 @@
 namespace SoloWay {
   public class Playlist {
-    private static Playlist _self;
+    private static Playlist self;
     private struct SongEnry {
       string title;
       string uri;
     }
-    private GLib.KeyFile _file;
-    private GLib.GenericArray<SongEnry?> _playlist;
-    private string _group_name = "Playlist";
+    private GLib.KeyFile file;
+    private GLib.GenericArray<SongEnry?> playlist;
+    private string group_name = "Playlist";
 
     public int length {
-      get {return _playlist.length;}
+      get {return playlist.length;}
       private set {}
     }
 
-    public signal void onPlaylistChange(Playlist pl);
+    public signal void playlist_change(Playlist pl);
 
     private Playlist() {
-      _file = new GLib.KeyFile();
-      _file.set_list_separator('=');
-      _playlist = new GLib.GenericArray<SongEnry?>();
+      file = new GLib.KeyFile();
+      file.set_list_separator('=');
+      playlist = new GLib.GenericArray<SongEnry?>();
     }
     public bool open(string filepath) {
       var result = false;
       try {
-        _file.load_from_file(filepath, GLib.KeyFileFlags.NONE);
-        var titles = _file.get_keys(_group_name);
+        file.load_from_file(filepath, GLib.KeyFileFlags.NONE);
+        var titles = file.get_keys(group_name);
         for (var i = 0; i < titles.length; i++) {
-          _playlist.add({titles[i], _file.get_string(_group_name, titles[i])});
+          playlist.add({titles[i], file.get_string(group_name, titles[i])});
         }
         result = true;
       } catch(GLib.KeyFileError key_err) {
@@ -35,38 +35,38 @@ namespace SoloWay {
       } catch(GLib.FileError err) {
         print(@"Load file: $(err.message)\n");
       }
-      onPlaylistChange(this);
+      playlist_change(this);
       return result;
     }
     public void save(string filepath) {
       SongEnry entry;
-      for (var i = 0; i < _playlist.length; i++) {
-        entry = _playlist.get(i);
-        _file.set_string(_group_name, entry.title, entry.uri);
+      for (var i = 0; i < playlist.length; i++) {
+        entry = playlist.get(i);
+        file.set_string(group_name, entry.title, entry.uri);
       }
       try {
-        _file.save_to_file(filepath);
+        file.save_to_file(filepath);
       } catch (GLib.FileError e) {
         print(@"Playlist.save(): $(e.message)");
       }
     }
-    public void addEntry(string title, string uri) {
-      _playlist.add({title, uri});
-      onPlaylistChange(this);
+    public void add_entry(string title, string uri) {
+      playlist.add({title, uri});
+      playlist_change(this);
     }
-    public void getEntry(int index, out string title, out string uri) {
-      var entry = _playlist.get(index);
+    public void get_entry(int index, out string title, out string uri) {
+      var entry = playlist.get(index);
       title = entry.title;
       uri = entry.uri;
     }
-    public void removeEntry(int index) {
-      onPlaylistChange(this);
+    public void remove_entry(int index) {
+      playlist_change(this);
     }
-    public static Playlist getInstance() {
-      if (_self == null) {
-        _self = new Playlist();
+    public static Playlist get() {
+      if (self == null) {
+        self = new Playlist();
       }
-      return _self;
+      return self;
     }
   }
 }

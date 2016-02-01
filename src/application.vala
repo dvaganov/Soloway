@@ -45,11 +45,11 @@ namespace SoloWay {
 		}
 		private void create_playlist() {
 			_win.clean_playlist();
-			var playlist = Playlist.getInstance();
+			var playlist = Playlist.get();
 			if (playlist.open(Settings.get_param("playlist_path"))) {
 				string title, uri;
 				for (var i = 0; i < playlist.length; i++) {
-					playlist.getEntry(i, out title, out uri);
+					playlist.get_entry(i, out title, out uri);
 					_win.add_entry(title, uri);
 				}
 			}

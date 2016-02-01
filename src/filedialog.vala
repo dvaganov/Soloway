@@ -1,10 +1,10 @@
 namespace SoloWay {
   namespace Dialogs {
-    private const string playlist_format = "swp";
+    private const string PLAYLIST_FORMAT = "swp";
     private Gtk.FileFilter create_filter() {
       var filter = new Gtk.FileFilter();
       filter.set_filter_name("SoloWay playlist");
-      filter.add_pattern(@"*.$playlist_format");
+      filter.add_pattern(@"*.$PLAYLIST_FORMAT");
       return filter;
     }
     public void open_file(Gtk.Window? window) {
@@ -14,7 +14,7 @@ namespace SoloWay {
       _dialog.add_filter(create_filter());
       if (_dialog.run() == Gtk.ResponseType.ACCEPT) {
         var filepath = _dialog.get_filename();
-        Playlist.getInstance().open(filepath);
+        Playlist.get().open(filepath);
       }
       _dialog.destroy();
     }
@@ -25,10 +25,10 @@ namespace SoloWay {
       _dialog.add_filter(create_filter());
       if (_dialog.run() == Gtk.ResponseType.ACCEPT) {
         var filepath = _dialog.get_filename();
-        if (!filepath.has_suffix (@".$playlist_format")) {
-          filepath += @".$playlist_format";
+        if (!filepath.has_suffix (@".$PLAYLIST_FORMAT")) {
+          filepath += @".$PLAYLIST_FORMAT";
         }
-        Playlist.getInstance().save(filepath);
+        Playlist.get().save(filepath);
       }
       _dialog.close ();
     }
