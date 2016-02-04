@@ -16,5 +16,6 @@ namespace SoloWay {
   public interface PlaylistRecord : GLib.Object {
     public abstract string title {get; set;}
     public abstract string uri {get; set;}
+    public abstract uint position {get; private set;}
   }
 }
