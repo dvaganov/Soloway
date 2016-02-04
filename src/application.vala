@@ -1,15 +1,15 @@
 namespace SoloWay {
 	public class Application : Gtk.Application {
-		private MainWindow _win;
+		private MainWindow win;
 
 		public Application(string[] args) {
 			Object(application_id: "home.dvaganov.soloway");
-			Player.init(args);
+			PlayerGst.init(args);
 		}
 		protected override void activate() {
 			Settings.init();
 			// create_playlist
-			var playlist = Playlist.get_instance();
+			var playlist = PlayGList.get_instance();
 			//playlist.changed.connect(create_playlist);
 			playlist.open(Settings.get_param("playlist_path"));
 			create_actions();
@@ -18,31 +18,38 @@ namespace SoloWay {
 			menu.append("Quit", "app.quit");
 			app_menu = menu;
 			MainWindow.init(this);
-			_win = MainWindow.get_instance();
-			_win.on_row_activate.connect(Player.get_instance().change_state);
-			Player.get_instance().state_changed.connect(_win.change_btn_state_to_play);
-			Player.get_instance().info_changed.connect(_win.change_panel_info);
-			add_window(_win);
+			win = MainWindow.get_instance();
+			win.on_row_activate.connect((uri) => {
+				var player = PlayerGst.get_instance();
+				if (player.set_src(uri)) {
+					player.play();
+				} else {
+					player.stop();
+				}
+			});
+			PlayerGst.get_instance().state_changed.connect(win.change_btn_state_to_play);
+			PlayerGst.get_instance().info_changed.connect(win.change_panel_info);
+			add_window(win);
 
-			_win.show_all();
+			win.show_all();
 		}
 		private void create_actions() {
 			var action = new SimpleAction("change-state", null);
 			action.activate.connect(() =>
 			{
-				Player.get_instance().change_state();
+				//PlayerGst.get_instance().change_state();
 			});
 			add_action(action);
 			action = new SimpleAction("next-entry", null);
 			action.activate.connect(() =>
 			{
-				_win.activate_next_row();
+				win.activate_next_row();
 			});
 			add_action(action);
 			action = new SimpleAction("prev-entry", null);
 			action.activate.connect(() =>
 			{
-				_win.activate_prev_row();
+				win.activate_prev_row();
 			});
 			add_action (action);
 			action = new SimpleAction("quit", null);

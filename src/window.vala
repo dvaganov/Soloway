@@ -45,17 +45,15 @@ namespace SoloWay {
 			scrolled_win.expand = true;
 			main_grid.attach(scrolled_win, 0, 0);
 
-			playlist = new Gtk.ListBox ();
-			playlist.row_activated.connect ((row) => {
+			playlist = new Gtk.ListBox();
+			playlist.row_activated.connect((row) => {
 			    var entry = row as Entry;
-			    on_row_activate (entry.uri);
-			    panel.change_title (entry.title);
+			    on_row_activate(entry.uri);
+			    panel.change_title(entry.title);
 			});
-			stdout.printf("Bind model\n");
-			playlist.bind_model(Playlist.get_model(), (item) => {
+			playlist.bind_model(PlayGList.get_model(), (item) => {
 				return item as Entry;
 			});
-			stdout.printf("Create bind\n");
 			scrolled_win.add (playlist);
 		}
 		public void add_entry (string title, string uri) {

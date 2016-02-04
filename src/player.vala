@@ -1,11 +1,11 @@
 namespace SoloWay {
 	public class PlayerGst : GLib.Object, Player {
-		private static Player player;
+		private static PlayerGst player;
 		private Gst.Pipeline pipeline;
 		private string uri;
 		private bool is_playing;
 
-		public signal void info_changed(string info);
+		//public signal void info_changed(string info);
 		//public signal void state_changed(bool is_playing);
 
 		private PlayerGst() {
@@ -16,7 +16,7 @@ namespace SoloWay {
 			bus.add_signal_watch();
 			bus.message.connect(this.on_message);
 		}
-		~Player () {
+		~PlayerGst() {
 			this.pipeline.set_state(Gst.State.NULL);
 			Gst.deinit ();
 		}
@@ -59,9 +59,12 @@ namespace SoloWay {
 		public bool play() {
 			var result = false;
 			if (!this.is_playing && this.uri != null) {
+				this.pipeline.set_state(Gst.State.NULL);
+				this.pipeline.set("uri", this.uri);
 				this.pipeline.set_state(Gst.State.PLAYING);
 				this.is_playing = true;
 				result = true;
+				this.state_changed(is_playing);
 			}
 			return result;
 		}
@@ -71,18 +74,24 @@ namespace SoloWay {
 				this.pipeline.set_state(Gst.State.NULL);
 				this.is_playing = false;
 				result = true;
+				this.state_changed(is_playing);
 			}
 			return result;
 		}
-		public void set_src(string uri) {
-			this.uri = uri;
+		public bool set_src(string uri) {
+			var result = false;
+			if (this.uri != uri) {
+				this.uri = uri;
+				result = true;
+			}
+			return result;
 		}
 		public static void init(string[] args) {
 			Gst.init(ref args);
 		}
 		public static Player get_instance() {
 			if (player == null) {
-				player = new Player();
+				player = new PlayerGst();
 			}
 			return player;
 		}

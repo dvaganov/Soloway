@@ -1,12 +1,12 @@
 namespace SoloWay {
   public class PlayGList : GLib.Object, Playlist {
-    private static Playlist self;
+    private static PlayGList self;
     private GLib.KeyFile file;
     private GLib.ListStore playlist;
     private string group_name = "Playlist";
 
     private PlayGList(GLib.Type? type) {
-      type = type != null ? type : typeof(PlaylistRecord)
+      type = type != null ? type : typeof(PlaylistRecord);
       this.file = new GLib.KeyFile();
       this.file.set_list_separator('=');
       this.playlist = new GLib.ListStore(type);
@@ -55,12 +55,17 @@ namespace SoloWay {
       title = entry.title;
       uri = entry.uri;
     }*/
-    public void remove(int position) {
-      this.playlist.remove(position);
+    public bool remove(uint position) {
+      var result = false;
+      if (this.playlist.get_n_items() > position) {
+        this.playlist.remove(position);
+        result = true;
+      }
+      return result;
     }
-    public static Playlist get_instance() {
+    public static Playlist get_instance(GLib.Type? type = null) {
       if (self == null) {
-        self = new Playlist();
+        self = new PlayGList(type);
       }
       return self;
     }

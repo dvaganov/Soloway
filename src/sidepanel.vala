@@ -43,7 +43,7 @@ namespace SoloWay {
       var title = entry.text;
       entry = grid.get_child_at(0, 3) as Gtk.Entry;
       var uri = entry.text;
-      Playlist.get_instance().add_entry(title, uri);
+      PlayGList.get_instance().add(new Entry(title, uri));
       this.show_panel();
     }
     public void show_panel() {
