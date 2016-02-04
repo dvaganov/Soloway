@@ -8,29 +8,29 @@ namespace SoloWay {
       return filter;
     }
     public void open_file(Gtk.Window? window) {
-      var _dialog = new Gtk.FileChooserDialog(null, window, Gtk.FileChooserAction.OPEN, null);
-      _dialog.add_button ("_Cancel", Gtk.ResponseType.CANCEL);
-      _dialog.add_button ("_Open", Gtk.ResponseType.ACCEPT).get_style_context().add_class("suggested-action");
-      _dialog.add_filter(create_filter());
-      if (_dialog.run() == Gtk.ResponseType.ACCEPT) {
-        var filepath = _dialog.get_filename();
-        Playlist.get_instance().open(filepath);
+      var dialog = new Gtk.FileChooserDialog(null, window, Gtk.FileChooserAction.OPEN, null);
+      dialog.add_button ("_Cancel", Gtk.ResponseType.CANCEL);
+      dialog.add_button ("_Open", Gtk.ResponseType.ACCEPT).get_style_context().add_class("suggested-action");
+      dialog.add_filter(create_filter());
+      if (dialog.run() == Gtk.ResponseType.ACCEPT) {
+        var filename = dialog.get_filename();
+        PlaylistGList.get_instance().open(filename);
       }
-      _dialog.destroy();
+      dialog.destroy();
     }
     public void save_file(Gtk.Window? window) {
-      var _dialog = new Gtk.FileChooserDialog(null, window, Gtk.FileChooserAction.SAVE, null);
-      _dialog.add_button ("_Cancel", Gtk.ResponseType.CANCEL);
-      _dialog.add_button ("_Save", Gtk.ResponseType.ACCEPT).get_style_context().add_class("suggested-action");
-      _dialog.add_filter(create_filter());
-      if (_dialog.run() == Gtk.ResponseType.ACCEPT) {
-        var filepath = _dialog.get_filename();
-        if (!filepath.has_suffix (@".$PLAYLIST_FORMAT")) {
-          filepath += @".$PLAYLIST_FORMAT";
+      var dialog = new Gtk.FileChooserDialog(null, window, Gtk.FileChooserAction.SAVE, null);
+      dialog.add_button ("_Cancel", Gtk.ResponseType.CANCEL);
+      dialog.add_button ("_Save", Gtk.ResponseType.ACCEPT).get_style_context().add_class("suggested-action");
+      dialog.add_filter(create_filter());
+      if (dialog.run() == Gtk.ResponseType.ACCEPT) {
+        var filename = dialog.get_filename();
+        if (!filename.has_suffix (@".$PLAYLIST_FORMAT")) {
+          filename += @".$PLAYLIST_FORMAT";
         }
-        Playlist.get_instance().save(filepath);
+        PlaylistGList.get_instance().save(filename);
       }
-      _dialog.close ();
+      dialog.close ();
     }
   }
 }

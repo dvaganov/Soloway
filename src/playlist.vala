@@ -55,8 +55,8 @@ namespace SoloWay {
       title = entry.title;
       uri = entry.uri;
     }*/
-    public void remove(PlaylistRecord entry) {
-      this.playlist.remove(entry.position);
+    public void remove(int position) {
+      this.playlist.remove(position);
     }
     public static Playlist get_instance() {
       if (self == null) {

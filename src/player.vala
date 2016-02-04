@@ -1,14 +1,14 @@
 namespace SoloWay {
-	public class Player : GLib.Object {
+	public class PlayerGst : GLib.Object, Player {
 		private static Player player;
 		private Gst.Pipeline pipeline;
 		private string uri;
 		private bool is_playing;
 
 		public signal void info_changed(string info);
-		public signal void state_changed(bool is_playing);
+		//public signal void state_changed(bool is_playing);
 
-		private Player() {
+		private PlayerGst() {
 			this.pipeline = Gst.ElementFactory.make("playbin", "player") as Gst.Pipeline;
 			this.is_playing = false;
 			this.uri = null;
@@ -31,7 +31,7 @@ namespace SoloWay {
 				this.info_changed(current_playing);
 			}
 		}
-		public void change_state(string? uri = null) {
+		/*public void change_state(string? uri = null) {
 			if (uri == null) {
 				if (this.is_playing) {
 					this.pipeline.set_state(Gst.State.NULL);
@@ -55,6 +55,27 @@ namespace SoloWay {
 				this.is_playing = true;
 			}
 			this.state_changed(this.is_playing);
+		}*/
+		public bool play() {
+			var result = false;
+			if (!this.is_playing && this.uri != null) {
+				this.pipeline.set_state(Gst.State.PLAYING);
+				this.is_playing = true;
+				result = true;
+			}
+			return result;
+		}
+		public bool stop() {
+			var result = false;
+			if (this.is_playing) {
+				this.pipeline.set_state(Gst.State.NULL);
+				this.is_playing = false;
+				result = true;
+			}
+			return result;
+		}
+		public void set_src(string uri) {
+			this.uri = uri;
 		}
 		public static void init(string[] args) {
 			Gst.init(ref args);

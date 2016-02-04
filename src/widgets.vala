@@ -1,5 +1,5 @@
 namespace SoloWay {
-	public class Entry : Gtk.ListBoxRow {
+	public class Entry : Gtk.ListBoxRow, PlaylistRecord {
 		public string title {get; private set;}
 		public string uri {get; private set;}
 
