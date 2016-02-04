@@ -1,4 +1,5 @@
 SRC = \
+src/interfaces.vala \
 src/sidepanel.vala \
 src/settings.vala \
 src/filedialog.vala \
