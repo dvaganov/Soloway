@@ -4,40 +4,24 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>340</y>
-      <w>100</w>
-      <h>60</h>
+      <x>750</x>
+      <y>240</y>
+      <w>150</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Application
 --
+- settings
 - window
-- player</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>860</x>
-      <y>150</y>
-      <w>140</w>
-      <h>170</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Interface&gt;&gt;
-Player
---
-play()
-stop()
-change_uri()
-info_changed()
-state_changed()</panel_attributes>
+- player
+- playlist</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>880</x>
-      <y>10</y>
+      <x>1290</x>
+      <y>290</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -47,19 +31,19 @@ state_changed()</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>920</x>
-      <y>30</y>
-      <w>30</w>
-      <h>150</h>
+      <x>1190</x>
+      <y>290</y>
+      <w>120</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>630</x>
-      <y>30</y>
+      <x>890</x>
+      <y>530</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -69,9 +53,9 @@ state_changed()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>350</y>
-      <w>100</w>
+      <x>470</x>
+      <y>280</y>
+      <w>120</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>MainWindow
@@ -84,19 +68,21 @@ state_changed()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>360</x>
-      <y>20</y>
+      <x>650</x>
+      <y>690</y>
       <w>100</w>
-      <h>30</h>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>Entry</panel_attributes>
+    <panel_attributes>Entry
+--
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>460</y>
+      <x>300</x>
+      <y>340</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -106,8 +92,8 @@ state_changed()</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>460</y>
+      <x>120</x>
+      <y>340</y>
       <w>140</w>
       <h>30</h>
     </coordinates>
@@ -115,121 +101,334 @@ state_changed()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>630</x>
-      <y>150</y>
-      <w>100</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Interface&gt;&gt;
-Playlist
---
-save()
-open()</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>350</x>
-      <y>150</y>
-      <w>120</w>
-      <h>120</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Interface&gt;&gt;
-PlaylistRecord
---
-title
-uri</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>40</y>
-      <w>30</w>
-      <h>140</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>410</x>
-      <y>160</y>
-      <w>280</w>
+      <x>740</x>
+      <y>690</y>
+      <w>90</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>260.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>50</y>
+      <x>860</x>
+      <y>530</y>
+      <w>50</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;150.0;10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>280</y>
+      <w>190</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>170.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>300</y>
+      <w>310</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>320</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>110</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gtk.ApplicationWindow
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>110</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gtk.Application
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>690</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gtk.ListBoxRow
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>540</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gtk.Revealer
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>120</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Settings</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1370</x>
+      <y>580</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>GLib.ListStore
+fg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>130</y>
       <w>30</w>
       <h>130</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>160</y>
-      <w>230</w>
-      <h>250</h>
+      <x>520</x>
+      <y>130</y>
+      <w>30</w>
+      <h>170</h>
     </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>210.0;10.0;80.0;10.0;80.0;230.0;10.0;230.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
+      <x>180</x>
       <y>360</y>
-      <w>210</w>
-      <h>30</h>
+      <w>110</w>
+      <h>200</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>190.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>60</x>
-      <y>370</y>
-      <w>310</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>290.0;10.0;10.0;10.0;10.0;90.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>90.0;180.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>260</x>
-      <y>390</y>
+      <y>360</y>
       <w>110</w>
-      <h>90</h>
+      <h>200</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>90.0;10.0;10.0;10.0;10.0;70.0</additional_attributes>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;180.0;90.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>160</y>
+      <x>980</x>
+      <y>530</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>570</x>
+      <y>690</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>420</y>
+      <w>140</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gtk.ListBox
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>340</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>290</y>
+      <w>160</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1270</x>
+      <y>590</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1080</x>
+      <y>520</y>
+      <w>200</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;Interface&gt;&gt;/
+Playlist
+--
+save(): void
+open(): void
+get_model(): GLib.ListStore</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1030</x>
+      <y>280</y>
+      <w>170</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;Interface&gt;&gt;/
+Player
+--
+play(): void
+stop(): void
+change_uri(): bool
+signal info_changed()
+signal state_changed()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>680</y>
       <w>130</w>
-      <h>280</h>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>/&lt;&lt;Interface&gt;&gt;/
+PlaylistRecord
+--
++title: string
++uri: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1370</x>
+      <y>530</y>
+      <w>180</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>Gtk.FileChooserDialog
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1270</x>
+      <y>530</y>
+      <w>120</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;110.0;70.0;110.0;260.0;40.0;260.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>310</y>
+      <w>70</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>120</y>
+      <w>150</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;150.0;80.0;150.0;80.0;10.0;130.0;10.0</additional_attributes>
   </element>
 </diagram>
