@@ -5,9 +5,6 @@ namespace SoloWay {
 		private string uri;
 		private bool is_playing;
 
-		//public signal void info_changed(string info);
-		//public signal void state_changed(bool is_playing);
-
 		private PlayerGst() {
 			this.pipeline = Gst.ElementFactory.make("playbin", "player") as Gst.Pipeline;
 			this.is_playing = false;
@@ -31,34 +28,9 @@ namespace SoloWay {
 				this.info_changed(current_playing);
 			}
 		}
-		/*public void change_state(string? uri = null) {
-			if (uri == null) {
-				if (this.is_playing) {
-					this.pipeline.set_state(Gst.State.NULL);
-					this.is_playing = false;
-				} else {
-					if (this.uri != null) {
-						this.pipeline.set_state(Gst.State.PLAYING);
-						this.is_playing = true;
-					} else {
-						return;
-					}
-				}
-			} else if (this.is_playing && this.uri == uri) {
-				this.pipeline.set_state(Gst.State.NULL);
-				this.is_playing = false;
-			} else {
-				this.uri = uri;
-				this.pipeline.set_state(Gst.State.NULL);
-				this.pipeline.set("uri", this.uri);
-				this.pipeline.set_state(Gst.State.PLAYING);
-				this.is_playing = true;
-			}
-			this.state_changed(this.is_playing);
-		}*/
 		public bool play() {
 			var result = false;
-			if (!this.is_playing && this.uri != null) {
+			if (this.uri != null) {
 				this.pipeline.set_state(Gst.State.NULL);
 				this.pipeline.set("uri", this.uri);
 				this.pipeline.set_state(Gst.State.PLAYING);
@@ -73,12 +45,14 @@ namespace SoloWay {
 			if (this.is_playing) {
 				this.pipeline.set_state(Gst.State.NULL);
 				this.is_playing = false;
+				this.uri = null;
 				result = true;
 				this.state_changed(is_playing);
 			}
 			return result;
 		}
-		public bool set_src(string uri) {
+		public bool change_uri(string uri) {
+			// Return true only if uri changed
 			var result = false;
 			if (this.uri != uri) {
 				this.uri = uri;

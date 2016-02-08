@@ -2,9 +2,9 @@ namespace SoloWay {
   public interface Player : GLib.Object {
     public abstract bool play();
     public abstract bool stop();
-    public abstract bool set_src(string uri);
-    public abstract signal void info_changed(string info);
-    public abstract signal void state_changed(bool state);
+    public abstract bool change_uri(string uri);
+    public signal void info_changed(string info);
+    public signal void state_changed(bool state);
   }
 
   public interface Playlist : GLib.Object {
@@ -15,7 +15,7 @@ namespace SoloWay {
   }
 
   public interface PlaylistRecord : GLib.Object {
-    public abstract string title {get; set;}
-    public abstract string uri {get; set;}
+    public abstract string title {get; protected set;}
+    public abstract string uri {get; protected set;}
   }
 }

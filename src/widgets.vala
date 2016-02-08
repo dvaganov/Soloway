@@ -1,15 +1,26 @@
 namespace SoloWay {
 	public class Entry : Gtk.ListBoxRow, PlaylistRecord {
-		public string title {get; private set;}
-		public string uri {get; private set;}
+		public string title {get; protected set;}
+		public string uri {get; protected	 set;}
 
-		public Entry (string? title, string? uri) {
+		public Entry(string? title, string? uri) {
 			this.title = title;
 			this.uri = uri;
 			this.height_request = 50;
 
-			var label = new Gtk.Label (title);
-			add (label);
+			//var box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 0);
+			var label = new Gtk.Label(title);
+			//var btn = new Gtk.Button.from_icon_name("open-menu-symbolic");
+
+			/*btn.expand = false;
+			btn.valign = Gtk.Align.CENTER;
+			btn.margin_end = 10;
+
+			box.pack_start(label);
+			box.pack_end(btn, false, false);
+
+			add (box);*/
+			add(label);
 		}
 	}
 
