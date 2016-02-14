@@ -7,10 +7,28 @@ namespace SoloWay {
 		public signal void on_row_activate (string uri);
 
 		private MainWindow(Gtk.Application app) {
-			Object(application: app);
+			GLib.Object(application: app);
+			this.icon_name ="eagle";
+
+			var settings = new GLib.Settings("apps.soloway");
+			var window_size = settings.get_value("window-size");
+			this.resize(window_size.get_child_value(0).get_int32(),
+									window_size.get_child_value(1).get_int32());
+
+			this.size_allocate.connect((allocate) => {
+				if (!this.is_maximized) {
+					var width = new GLib.Variant.int32(allocate.width);
+					var height = new GLib.Variant.int32(allocate.height);
+					GLib.Variant current_window_size[2] = {width, height};
+					window_size = new GLib.Variant.array(null, current_window_size);
+					settings.set_value("window-size", window_size);
+				}
+			});
+
+			this.width_request = 600;
+			this.height_request = 300;
+
 			show_menubar = false;
-			default_width = 800;
-			default_height = 600;
 			window_position = Gtk.WindowPosition.CENTER;
 
 			var main_grid = new Gtk.Grid();
@@ -22,16 +40,20 @@ namespace SoloWay {
 			set_titlebar(header_bar);
 
 			var btn = new Gtk.Button.with_mnemonic("_Save");
-			btn.clicked.connect(() => {
-				Dialogs.save_file(this);
-			});
+			btn.action_name = "app.save-playlist";
 			header_bar.pack_start(btn);
 
 			btn = new Gtk.Button.with_mnemonic("_Open");
-			btn.clicked.connect(() => {
-				Dialogs.open_file(this);
-			});
+			btn.action_name = "app.open-playlist";
 			header_bar.pack_start(btn);
+
+			btn = new Gtk.Button.with_label("Notify");
+			btn.clicked.connect(() => {
+				var notification = new GLib.Notification("Hello world!");
+				notification.set_body("Hello world again!");
+				app.send_notification("test", notification);
+			});
+			header_bar.pack_end(btn);
 
 			var side_panel = SidePanel.get_instance();
 			main_grid.attach(side_panel, 1, 0, 1, 1);
@@ -89,7 +111,10 @@ namespace SoloWay {
 				prev_row.activate ();
 			}
 		}
-		public inline void change_panel_info(string info) {
+		public void change_panel_info(string info) {
+			var notification = new GLib.Notification(info);
+			notification.add_button("Search Internet for song", "app.search");
+			GLib.Application.get_default().send_notification("info-changed", notification);
 			panel.change_info(info);
 		}
 		public static void init(Gtk.Application app) {

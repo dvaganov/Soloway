@@ -1,13 +1,13 @@
+#!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=SoloWay
-Name[en_US]=SoloWay
+Name=Soloway
+Name[en_US]=Soloway
 Comment=Listen internet streams
 Comment[en_US.utf8]=
 GenericName[en_US.utf8]=Listen internet streams
-Exec=/home/dvaganov/Documents/Programming/Vala/Soloway/SoloWay
+Exec=soloway
 Icon=eagle
 Type=Application
 Terminal=false
 StartupNotify=true
 Categories=Player;Audio;Network;
-

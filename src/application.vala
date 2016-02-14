@@ -1,16 +1,20 @@
 namespace SoloWay {
 	public class Application : Gtk.Application {
 		private MainWindow win;
+		private Playlist playlist;
+		private GLib.Settings settings;
 
 		public Application(string[] args) {
-			Object(application_id: "home.dvaganov.soloway");
+			GLib.Object(application_id: "apps.Soloway");
 			PlayerGst.init(args);
 		}
 		protected override void activate() {
-			Settings.init();
+			// Load settings
+			settings = new GLib.Settings("apps.soloway");
 			// create_playlist
-			var playlist = PlayGList.get_instance();
-			playlist.open(Settings.get_param("playlist_path"));
+			playlist = PlayGList.get_instance();
+			playlist.open(settings.get_string("playlist-path"));
+			// Create actions
 			create_actions();
 			var menu = new GLib.Menu();
 			//menu.append("Change State", "app.change-state");
@@ -35,17 +39,47 @@ namespace SoloWay {
 		}
 		private void create_actions() {
 			var action = new SimpleAction("next-entry", null);
-			action.activate.connect(() =>
-			{
+			action.activate.connect(() => {
 				win.activate_next_row();
 			});
 			add_action(action);
+
 			action = new SimpleAction("prev-entry", null);
-			action.activate.connect(() =>
-			{
+			action.activate.connect(() => {
 				win.activate_prev_row();
 			});
 			add_action(action);
+
+			action = new SimpleAction("open-playlist", null);
+			action.activate.connect(() => {
+				var path	= Dialogs.open_file(this.win);
+				if (path != null) {
+					this.settings.set_string("playlist-path", path);
+					playlist.open(path);
+					win.show_all();
+				}
+			});
+			add_action(action);
+
+			action = new SimpleAction("save-playlist", null);
+			action.activate.connect(() => {
+				var path	= Dialogs.save_file(this.win);
+				if (path != null) {
+					this.settings.set_string("playlist-path", path);
+					playlist.save(path);
+					win.show_all();
+				}
+			});
+			add_action(action);
+
+			action = new SimpleAction("search", null);
+			action.activate.connect(() => {
+				var song = PlayerGst.get_instance().current_playing;
+				var btn = new Gtk.LinkButton(@"https://google.com/?q=$song");
+				btn.activate_link();
+			});
+			add_action(action);
+
 			action = new SimpleAction("quit", null);
 			action.activate.connect(this.quit);
 			add_action(action);

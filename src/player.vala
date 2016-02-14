@@ -5,6 +5,8 @@ namespace SoloWay {
 		private string uri;
 		private bool is_playing;
 
+		public string current_playing {protected set; get;}
+
 		private PlayerGst() {
 			this.pipeline = Gst.ElementFactory.make("playbin", "player") as Gst.Pipeline;
 			this.is_playing = false;
@@ -24,7 +26,7 @@ namespace SoloWay {
 				message.parse_tag(out tag);
 				tag.get_string("title", out title);
 				tag.get_string("location", out location);
-				var current_playing = title != null ? title : "Unkown";
+				this.current_playing = title != null ? title : "Unkown";
 				this.info_changed(current_playing);
 			}
 		}

@@ -1,5 +1,7 @@
 namespace SoloWay {
   public interface Player : GLib.Object {
+    public abstract string current_playing {protected set; get;}
+
     public abstract bool play();
     public abstract bool stop();
     public abstract bool change_uri(string uri);

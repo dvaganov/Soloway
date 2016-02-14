@@ -1,0 +1,16 @@
+<schemalist>
+  <schema id="apps.soloway" path="/apps/soloway/" gettext-domain="soloway">
+
+    <key name="playlist-path" type="s">
+      <default>"default.swp"</default>
+      <summary>Path of playlist</summary>
+      <description>Path of playlist</description>
+    </key>
+    <key name="window-size" type="ai">
+      <default>[800, 600]</default>
+      <summary>Window's size</summary>
+      <description>Resizind window [width, height]</description>
+    </key>
+
+  </schema>
+</schemalist>

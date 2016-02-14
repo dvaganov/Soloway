@@ -15,6 +15,7 @@ namespace SoloWay {
       var result = false;
       try {
         this.file.load_from_file(filename, GLib.KeyFileFlags.NONE);
+        playlist.remove_all();
         var titles = file.get_keys(group_name);
         string title, uri;
         for (var i = 0; i < titles.length; i++) {
@@ -24,9 +25,9 @@ namespace SoloWay {
         }
         result = true;
       } catch(GLib.KeyFileError key_err) {
-        print(@"Load file: $(key_err.message)\n");
+        print(@"PlayGList.load(): (keyfile)  $(key_err.message)\n");
       } catch(GLib.FileError err) {
-        print(@"Load file: $(err.message)\n");
+        print(@"PlayGList.load(): (file) $(err.message)\n");
       }
       return result;
     }
@@ -44,17 +45,12 @@ namespace SoloWay {
       try {
         this.file.save_to_file(filename);
       } catch (GLib.FileError e) {
-        print(@"Playlist.save(): $(e.message)");
+        print(@"PlayGList.save(): $(e.message)");
       }
     }
     public void add(PlaylistRecord entry) {
       this.playlist.append(entry);
     }
-    /*public void get_entry(int index, out string title, out string uri) {
-      var entry = this.playlist.get_object(index) as Entry;
-      title = entry.title;
-      uri = entry.uri;
-    }*/
     public bool remove(uint position) {
       var result = false;
       if (this.playlist.get_n_items() > position) {
